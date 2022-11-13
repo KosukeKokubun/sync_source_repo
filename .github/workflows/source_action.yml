@@ -1,0 +1,21 @@
+name: dispatch target files updated
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'test'
+jobs:
+  dispatch-target-updated:
+    strategy:
+      matrix:
+        repo: ['KosukeKokubun/sync_copy_repo']
+    name: dispatch-target-updated
+    runs-on: ubuntu-latest
+    steps:
+      - name: dispatch target-updated
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: target-updated
